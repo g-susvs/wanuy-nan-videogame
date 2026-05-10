@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://d31ovqa1th4xp"]
+
+[ext_resource type="Texture2D" uid="uid://cl5x8vgc502lp" path="res://assets/icon.svg" id="1_5536t"]
+[ext_resource type="Script" uid="uid://c2qa1ne3m283y" path="res://scripts/melee_enemy.gd" id="1_q6kwv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6kwv"]
+size = Vector2(49, 53)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6kwv"]
+radius = 515.0786
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmqau"]
+radius = 37.12142
+
+[node name="MeleeEnemy" type="CharacterBody2D" unique_id=1899222375]
+position = Vector2(0, 1)
+collision_layer = 16
+collision_mask = 17
+script = ExtResource("1_q6kwv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=566761239]
+scale = Vector2(0.390625, 0.421875)
+texture = ExtResource("1_5536t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1059933098]
+shape = SubResource("RectangleShape2D_q6kwv")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=118993689]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=236683205]
+visible = false
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_q6kwv")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=674585058]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=722056400]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_vmqau")
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=2053367929]
+one_shot = true
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

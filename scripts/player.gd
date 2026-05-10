@@ -28,3 +28,15 @@ func _physics_process(delta: float) -> void:
 		velocity.y = jump_force
 	
 	move_and_slide()
+
+func take_damage(amount):
+	if is_dead:
+		return
+		
+	lives -= amount
+	print("VIDAS: ", lives)
+	if lives <= 0:
+		die()
+		
+func die():
+	is_dead = true

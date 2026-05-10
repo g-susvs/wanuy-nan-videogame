@@ -2,10 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://dhi6codplffbb" path="res://scenes/map.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bwalq7d52qkm3" path="res://scenes/player.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://d31ovqa1th4xp" path="res://scenes/mele-enemy.tscn" id="3_sugp2"]
 
 [node name="Main" type="Node2D" unique_id=251553662]
 
 [node name="Player" parent="." unique_id=545058791 instance=ExtResource("2_sugp2")]
-position = Vector2(-74, 27)
+position = Vector2(450, 526)
 
 [node name="Map" parent="." unique_id=245702739 instance=ExtResource("1_0wfyh")]
+
+[node name="MeleEnemy" parent="." unique_id=1407886916 instance=ExtResource("3_sugp2")]
+position = Vector2(945, 443)
+
+[node name="MeleEnemy2" parent="." unique_id=1899222375 instance=ExtResource("3_sugp2")]
+position = Vector2(-51, 447)
