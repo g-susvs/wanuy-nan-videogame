@@ -2,8 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dhi6codplffbb" path="res://scenes/map.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bwalq7d52qkm3" path="res://scenes/player.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://dv0b1bfhwn7p7" path="res://scenes/enemy.tscn" id="4_jyhfs"]
-[ext_resource type="Script" uid="uid://bldekw2afbj36" path="res://scripts/game_over.gd" id="4_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://rsv2d6tfcsms" path="res://scenes/mele-enemy.tscn" id="3_sugp2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0wfyh"]
 distance = -497.0
@@ -12,12 +11,11 @@ distance = -497.0
 position = Vector2(-37, -628)
 
 [node name="Player" parent="." unique_id=545058791 instance=ExtResource("2_sugp2")]
-light_mask = 2
-position = Vector2(-23, 536)
+position = Vector2(-37, 1016)
 slide_on_ceiling = false
 
 [node name="Map" parent="." unique_id=245702739 instance=ExtResource("1_0wfyh")]
-position = Vector2(-126, 569)
+position = Vector2(-162, 566)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Map" unique_id=1145476374]
 position = Vector2(32, 480)
@@ -26,11 +24,5 @@ position = Vector2(32, 480)
 position = Vector2(47, 58)
 shape = SubResource("WorldBoundaryShape2D_0wfyh")
 
-[node name="Enemy" parent="." unique_id=385282218 instance=ExtResource("4_jyhfs")]
-position = Vector2(686, 974)
-speed = 50.0
-patrol_left = 450.0
-patrol_right = 700.0
-
-[node name="GameOverScreen" type="CanvasLayer" parent="." unique_id=2104601429]
-script = ExtResource("4_tbgi4")
+[node name="MeleeEnemy" parent="." unique_id=1899222375 instance=ExtResource("3_sugp2")]
+position = Vector2(771, 984)

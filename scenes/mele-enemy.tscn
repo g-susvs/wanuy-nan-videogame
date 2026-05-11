@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://rsv2d6tfcsms"]
+
+[ext_resource type="Script" uid="uid://c2qa1ne3m283y" path="res://scripts/melee_enemy.gd" id="1_q6kwv"]
+[ext_resource type="Texture2D" uid="uid://bvskiy0j2si7a" path="res://assets/sprites/melee-enemy-sprite.png" id="2_vmqau"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmqau"]
+atlas = ExtResource("2_vmqau")
+region = Rect2(645, 418, 215, 209)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wewj"]
+atlas = ExtResource("2_vmqau")
+region = Rect2(852, 418, 388, 209)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("2_vmqau")
+region = Rect2(0, 420, 135, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("2_vmqau")
+region = Rect2(187, 420, 187, 210)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("2_vmqau")
+region = Rect2(406, 418, 203, 209)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ngyb4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmqau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wewj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmqau")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}],
+"loop": true,
+"name": &"step1",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6kwv"]
+size = Vector2(52, 75)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6kwv"]
+radius = 209.88806
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmqau"]
+radius = 37.12142
+
+[node name="MeleeEnemy" type="CharacterBody2D" unique_id=1899222375]
+position = Vector2(0, 1)
+collision_layer = 16
+collision_mask = 17
+script = ExtResource("1_q6kwv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=340237310]
+position = Vector2(1, 0)
+scale = Vector2(0.390625, 0.421875)
+sprite_frames = SubResource("SpriteFrames_ngyb4")
+animation = &"attack"
+frame_progress = 0.32117447
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1059933098]
+visible = false
+position = Vector2(-12, 4.5)
+shape = SubResource("RectangleShape2D_q6kwv")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=118993689]
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=236683205]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_q6kwv")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=674585058]
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=722056400]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_vmqau")
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=2053367929]
+one_shot = true
+
+[node name="PatrolTimer" type="Timer" parent="." unique_id=545817009]
+wait_time = 3.0
+autostart = true
+
+[node name="FloorRayCast" type="RayCast2D" parent="." unique_id=855304653]
+target_position = Vector2(37, 43)
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="PatrolTimer" to="." method="_on_patrol_timer_timeout"]
