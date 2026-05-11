@@ -37,7 +37,7 @@ slide_on_ceiling = false
 position = Vector2(1219, 1063)
 
 [node name="Enemy" parent="." unique_id=385282218 instance=ExtResource("4_jyhfs")]
-position = Vector2(323, 1070)
+position = Vector2(453, 978)
 
 [node name="GameOverScreen" type="CanvasLayer" parent="." unique_id=1308514022]
 script = ExtResource("5_tbgi4")
