@@ -32,12 +32,12 @@ func _physics_process(delta: float) -> void:
 	if _player_in_range():
 		velocity.x = 0
 		sprite.flip_h = (player.global_position.x < global_position.x)
-		sprite.play("attack")
+		_set_animation("attack")
 	elif not is_waiting:
 		_patrol()
 	else:
 		velocity.x = 0
-		sprite.play("idle")
+		_set_animation("idle")
 
 	move_and_slide()
 
@@ -53,7 +53,7 @@ func _patrol() -> void:
 
 	velocity.x = speed * direction
 	sprite.flip_h = direction < 0
-	sprite.play("run")
+	_set_animation("run")
 
 func _wait_then_continue() -> void:
 	is_waiting = true
@@ -75,3 +75,16 @@ func _shoot() -> void:
 	proj.global_position = global_position + Vector2(0, -20)
 	var dir = sign(player.global_position.x - global_position.x)
 	proj.init(dir)
+	
+func _set_animation(anim: String) -> void:
+	sprite.play(anim)
+	match anim:
+		"run":
+			sprite.offset = Vector2(0, 0)
+			sprite.scale = Vector2(0.216, 0.197) 
+		"idle":
+			sprite.offset = Vector2(0, 0)
+			sprite.scale = Vector2(0.230, 0.210)
+		"attack":
+			sprite.offset = Vector2(0, -6)
+			sprite.scale = Vector2(0.320, 0.330)  # ajusta este valor

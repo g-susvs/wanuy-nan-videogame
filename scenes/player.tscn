@@ -57,7 +57,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_gl8cc")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -160,6 +160,6 @@ position = Vector2(177, -108)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=113018412]
 position = Vector2(3.5, -8)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
-animation = &"spear"
+animation = &"death"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
