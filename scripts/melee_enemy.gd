@@ -40,8 +40,9 @@ func handle_patrol() -> void:
 	velocity.x = patrol_direction * speed
 	update_sprite_direction(patrol_direction)
 	animated_sprite.play("step1")
-	if velocity.x != 0 and !floor_raycast.is_colliding():
-		change_direction()
+	if is_on_floor():
+		if velocity.x != 0 and !floor_raycast.is_colliding():
+			change_direction()
 
 func handle_chase() -> void:
 	
