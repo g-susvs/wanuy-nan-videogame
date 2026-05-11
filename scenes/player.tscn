@@ -29,7 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://bjoskblqlp5rh" path="res://assets/spear3.png" id="27_sc3ue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(58, 54)
+size = Vector2(74, 86.25)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
 animations = [{
@@ -57,7 +57,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_gl8cc")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -142,23 +142,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=545058791]
-collision_layer = 4
+[node name="Player" type="CharacterBody2D" unique_id=545058791 groups=["player"]]
+collision_mask = 3
 script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=787907167]
-position = Vector2(114, 395)
+position = Vector2(0, -0.125)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=2033807291]
-position = Vector2(116, 403)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966076475]
-position = Vector2(303, 253)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=113018412]
-position = Vector2(-180, 378)
+position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
-animation = &"spear"
+animation = &"idle"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

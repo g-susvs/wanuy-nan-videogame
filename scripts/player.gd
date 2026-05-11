@@ -68,7 +68,10 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		esta_atacando = false
 	elif anim == "death":
 		is_dead = true
-
+		var game_over = get_tree().root.get_node_or_null("Main/GameOverScreen")
+		if game_over:
+			game_over.show_game_over()
+		
 func recibir_danio() -> void:
 	if is_dead:
 		return
