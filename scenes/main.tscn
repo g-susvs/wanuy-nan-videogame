@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dhi6codplffbb" path="res://scenes/map.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bwalq7d52qkm3" path="res://scenes/player.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://rsv2d6tfcsms" path="res://scenes/mele-enemy.tscn" id="3_sugp2"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0wfyh"]
 distance = -497.0
@@ -10,7 +11,7 @@ distance = -497.0
 position = Vector2(-37, -628)
 
 [node name="Player" parent="." unique_id=545058791 instance=ExtResource("2_sugp2")]
-position = Vector2(-47, 430)
+position = Vector2(-37, 1016)
 slide_on_ceiling = false
 
 [node name="Map" parent="." unique_id=245702739 instance=ExtResource("1_0wfyh")]
@@ -22,3 +23,6 @@ position = Vector2(32, 480)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StaticBody2D" unique_id=733648387]
 position = Vector2(47, 58)
 shape = SubResource("WorldBoundaryShape2D_0wfyh")
+
+[node name="MeleeEnemy" parent="." unique_id=1899222375 instance=ExtResource("3_sugp2")]
+position = Vector2(771, 984)
