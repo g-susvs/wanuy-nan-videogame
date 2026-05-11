@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 120.0
 @export var gravity: float = 900.0
-@export var stop_distance: float = 40.0
+@export var stop_distance: float = 50
 @export var raycast_distance := 12.0
 
 @onready var attack_area = $AttackArea
@@ -40,7 +40,7 @@ func handle_patrol() -> void:
 	velocity.x = patrol_direction * speed
 	update_sprite_direction(patrol_direction)
 	animated_sprite.play("step1")
-	if !floor_raycast.is_colliding():
+	if velocity.x != 0 and !floor_raycast.is_colliding():
 		change_direction()
 
 func handle_chase() -> void:
@@ -90,7 +90,7 @@ func attack():
 	
 	# Daño al jugador
 	if player != null and !player.is_dead:
-		player.take_damage(1)
+		player.recibir_danio()
 	
 	attack_cooldown.start()
 

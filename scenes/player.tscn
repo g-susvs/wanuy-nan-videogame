@@ -142,22 +142,23 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=545058791]
+[node name="Player" type="CharacterBody2D" unique_id=545058791 groups=["player"]]
+position = Vector2(0, -2)
 collision_layer = 4
 script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=787907167]
-position = Vector2(114, 392)
+position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=2033807291]
-position = Vector2(116, 403)
+position = Vector2(0.5, 3)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966076475]
-position = Vector2(303, 253)
+position = Vector2(177, -108)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=113018412]
-position = Vector2(117, 381)
+position = Vector2(3.5, -8)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
 animation = &"spear"
 
