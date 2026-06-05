@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bc0cmo47gj8jh"]
+
+[ext_resource type="Script" uid="uid://3b7m6eu3av7s" path="res://scripts/ui/heads_up_display.gd" id="1_fsu6e"]
+
+[node name="LevelBaseInterface" type="CanvasLayer" unique_id=1228723416]
+script = ExtResource("1_fsu6e")
+
+[node name="HeartsContainer" type="HBoxContainer" parent="." unique_id=334412278]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 16.0
+offset_bottom = 48.0
+theme_override_constants/separation = 6

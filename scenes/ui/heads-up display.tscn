@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dk6sa7fwr6kn8"]
+
+[ext_resource type="Script" uid="uid://3b7m6eu3av7s" path="res://scripts/ui/heads_up_display.gd" id="1_uwsif"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwsif"]
+bg_color = Color(0, 0, 0, 0.41568628)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="HUD" type="CanvasLayer" unique_id=1228723416]
+script = ExtResource("1_uwsif")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=580283]
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 195.0
+offset_bottom = 51.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwsif")
+
+[node name="HeartsContainer" type="HBoxContainer" parent="PanelContainer" unique_id=447262689]
+layout_mode = 2
+theme_override_constants/separation = -8

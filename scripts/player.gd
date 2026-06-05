@@ -9,6 +9,9 @@ var lives: int
 var is_dead: bool = false
 var esta_atacando: bool = false
 
+# Señal que emite el nuevo valor de vidas cada vez que cambia
+signal vida_cambiada(vidas_actuales: int)
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
@@ -76,6 +79,7 @@ func recibir_danio() -> void:
 	if is_dead:
 		return
 	lives -= 1
+	vida_cambiada.emit(lives)
 	if lives <= 0:
 		is_dead = true
 		sprite.play("death")
