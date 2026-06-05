@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cs4bgh1f1oolq" path="res://scripts/enemy/ranged-enemy.gd" id="1_7upw8"]
 [ext_resource type="PackedScene" uid="uid://dy6e8nsptw338" path="res://scenes/enemy/projectile.tscn" id="2_o01g3"]
-[ext_resource type="Texture2D" uid="uid://drh3aacfjitrw" path="res://assets/enemy_attack.png" id="3_ncoir"]
-[ext_resource type="Texture2D" uid="uid://c6soys1ifvtaw" path="res://assets/enemy_idle.png" id="4_cj8pp"]
-[ext_resource type="Texture2D" uid="uid://c6h0o6xs0jwfg" path="res://assets/enemy (2).png" id="5_hc8m3"]
+[ext_resource type="Texture2D" uid="uid://drh3aacfjitrw" path="res://assets/enemy/enemy_attack.png" id="3_ncoir"]
+[ext_resource type="Texture2D" uid="uid://c6soys1ifvtaw" path="res://assets/enemy/enemy_idle.png" id="4_cj8pp"]
+[ext_resource type="Texture2D" uid="uid://c6h0o6xs0jwfg" path="res://assets/enemy/enemy (2).png" id="5_hc8m3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qclf"]
 atlas = ExtResource("3_ncoir")

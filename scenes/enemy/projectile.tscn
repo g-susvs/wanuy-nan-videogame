@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dy6e8nsptw338"]
 
-[ext_resource type="Texture2D" uid="uid://v4ch8fxgfv8d" path="res://assets/lanza.png" id="1_c8fcr"]
-[ext_resource type="Script" uid="uid://63f4dtcv2pkk" path="res://scripts/projectile.gd" id="1_q3m7n"]
+[ext_resource type="Texture2D" uid="uid://v4ch8fxgfv8d" path="res://assets/enemy/lanza.png" id="1_c8fcr"]
+[ext_resource type="Script" uid="uid://63f4dtcv2pkk" path="res://scripts/enemy/projectile.gd" id="1_q3m7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3m7n"]
 size = Vector2(55, 9)

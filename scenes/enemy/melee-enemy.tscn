@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://rsv2d6tfcsms"]
 
 [ext_resource type="Script" uid="uid://c2qa1ne3m283y" path="res://scripts/enemy/melee_enemy.gd" id="1_q6kwv"]
-[ext_resource type="Texture2D" uid="uid://bvskiy0j2si7a" path="res://assets/sprites/melee-enemy-sprite.png" id="2_vmqau"]
+[ext_resource type="Texture2D" uid="uid://bvskiy0j2si7a" path="res://assets/enemy/melee-enemy-sprite.png" id="2_vmqau"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vmqau"]
 atlas = ExtResource("2_vmqau")
