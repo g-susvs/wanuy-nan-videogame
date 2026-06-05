@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cgh0c4rihbr7e"]
 
 [ext_resource type="Texture2D" uid="uid://c6h0o6xs0jwfg" path="res://assets/enemy (2).png" id="1_7p1mj"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_md0e3"]
-[ext_resource type="PackedScene" uid="uid://dy6e8nsptw338" path="res://scenes/projectile.tscn" id="2_4ra3w"]
+[ext_resource type="Script" uid="uid://cs4bgh1f1oolq" path="res://scripts/enemy/enemy.gd" id="1_md0e3"]
+[ext_resource type="PackedScene" uid="uid://dy6e8nsptw338" path="res://scenes/enemy/projectile.tscn" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://drh3aacfjitrw" path="res://assets/enemy_attack.png" id="3_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://c6soys1ifvtaw" path="res://assets/enemy_idle.png" id="4_c4w8v"]
 

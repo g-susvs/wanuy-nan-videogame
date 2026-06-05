@@ -15,6 +15,15 @@ run/main_scene="uid://dlg27yyikhhuk"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://assets/icon.svg"
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "yellow",
+"res://scenes/": "green",
+"res://scripts/": "blue",
+"res://tile_sets/": "purple"
+}
+
 [layer_names]
 
 2d_physics/layer_1="Sólido"

@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dhi6codplffbb" path="res://scenes/map.tscn" id="1_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://c8mx5s2q84gbh" path="res://assets/sprites/ChatGPT Image 11 may 2026, 06_06_44 p.m..png" id="1_tefeu"]
 [ext_resource type="PackedScene" uid="uid://bwalq7d52qkm3" path="res://scenes/player.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://rsv2d6tfcsms" path="res://scenes/mele-enemy.tscn" id="3_sugp2"]
-[ext_resource type="PackedScene" uid="uid://cgh0c4rihbr7e" path="res://scenes/enemy.tscn" id="4_jyhfs"]
-[ext_resource type="Script" uid="uid://bldekw2afbj36" path="res://scripts/game_over.gd" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://rsv2d6tfcsms" path="res://scenes/enemy/melee-enemy.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cgh0c4rihbr7e" path="res://scenes/enemy/enemy.tscn" id="4_jyhfs"]
+[ext_resource type="Script" path="res://scripts/game_over.gd" id="5_tbgi4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0wfyh"]
 distance = -497.0
