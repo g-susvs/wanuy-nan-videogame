@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://cpnkvuvjowb61" path="res://tile_sets/superficie.tres" id="1_4xfga"]
 
-[node name="Map" type="Node2D" unique_id=245702739]
+[node name="level-1" type="Node2D" unique_id=245702739]
 position = Vector2(0, 37)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=265565503]
