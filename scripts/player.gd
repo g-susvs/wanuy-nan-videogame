@@ -9,6 +9,7 @@ extends CharacterBody2D
 var lives: int
 var is_dead: bool = false
 var esta_atacando: bool = false
+var is_invincible: bool = false
 
 # Señal que emite el nuevo valor de vidas cada vez que cambia
 signal vida_cambiada(vidas_actuales: int)
@@ -82,7 +83,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			game_over.show_game_over()
 		
 func recibir_danio() -> void:
-	if is_dead:
+	if is_dead or is_invincible:
 		return
 	lives -= 1
 	vida_cambiada.emit(lives)
@@ -90,5 +91,14 @@ func recibir_danio() -> void:
 		is_dead = true
 		sprite.play("death")
 	else:
-		esta_atacando = true
-		sprite.play("death")
+		_parpadear()
+
+func _parpadear() -> void:
+	is_invincible = true
+	var tween := create_tween()
+	# Parpadea 4 veces: alterna opacidad entre 0.15 y 1
+	for i in range(4):
+		tween.tween_property(sprite, "modulate:a", 0.15, 0.08)
+		tween.tween_property(sprite, "modulate:a", 1.0, 0.08)
+	# Al terminar, quita la invencibilidad
+	tween.tween_callback(func(): is_invincible = false)
