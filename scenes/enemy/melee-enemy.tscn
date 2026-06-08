@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://rsv2d6tfcsms"]
+[gd_scene format=3 uid="uid://rsv2d6tfcsms"]
 
-[ext_resource type="Script" path="res://scripts/enemy/melee_enemy.gd" id="1_q6kwv"]
+[ext_resource type="Script" uid="uid://c2qa1ne3m283y" path="res://scripts/enemy/melee_enemy.gd" id="1_q6kwv"]
 [ext_resource type="Texture2D" uid="uid://bvskiy0j2si7a" path="res://assets/enemy/melee-enemy-sprite.png" id="2_vmqau"]
 [ext_resource type="Texture2D" uid="uid://djygngfvrfdhg" path="res://assets/enemy/Enemy_dead.png" id="3_07b45"]
 
@@ -76,7 +76,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d2230")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -109,47 +109,47 @@ radius = 209.888
 [sub_resource type="CircleShape2D" id="CircleShape2D_vmqau"]
 radius = 25.02
 
-[node name="MeleeEnemy" type="CharacterBody2D"]
+[node name="MeleeEnemy" type="CharacterBody2D" unique_id=359047705]
 position = Vector2(0, 1)
 collision_layer = 16
 collision_mask = 17
 script = ExtResource("1_q6kwv")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1265601761]
 position = Vector2(-0.999999, -6)
 scale = Vector2(0.413446, 0.444976)
 sprite_frames = SubResource("SpriteFrames_ngyb4")
 animation = &"death"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=616687825]
 position = Vector2(-12, 4.5)
 shape = SubResource("RectangleShape2D_q6kwv")
 
-[node name="DetectionArea" type="Area2D" parent="."]
+[node name="DetectionArea" type="Area2D" parent="." unique_id=2057085102]
 visible = false
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=77873136]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_q6kwv")
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="AttackArea" type="Area2D" parent="." unique_id=99663205]
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=1473213523]
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_vmqau")
 
-[node name="AttackCooldown" type="Timer" parent="."]
+[node name="AttackCooldown" type="Timer" parent="." unique_id=123768405]
 one_shot = true
 
-[node name="PatrolTimer" type="Timer" parent="."]
+[node name="PatrolTimer" type="Timer" parent="." unique_id=66396159]
 wait_time = 3.0
 autostart = true
 
-[node name="FloorRayCast" type="RayCast2D" parent="."]
+[node name="FloorRayCast" type="RayCast2D" parent="." unique_id=1064457378]
 target_position = Vector2(37, 43)
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

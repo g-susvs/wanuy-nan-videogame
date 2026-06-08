@@ -4,7 +4,6 @@ extends "res://scripts/enemy/enemy.gd"
 
 @export var stop_distance: float = 50.0
 @export var raycast_distance: float = 12.0
-@export var max_lives: int = 1
 
 @onready var attack_area = $AttackArea
 @onready var attack_cooldown = $AttackCooldown
@@ -14,8 +13,6 @@ extends "res://scripts/enemy/enemy.gd"
 
 var can_attack: bool = true
 var player_in_attack_range: bool = false
-var lives: int
-var is_dead: bool = false
 var esta_atacando: bool = false
 
 func _ready() -> void:
@@ -100,6 +97,15 @@ func _on_attack_area_body_exited(body: Node) -> void:
 
 func _on_attack_cooldown_timeout() -> void:
 	can_attack = true
+
+func _on_death() -> void:
+	set_physics_process(false)
+	$CollisionShape2D.set_deferred("disabled", true)
+	animated_sprite.play("death")
+	animated_sprite.animation_finished.connect(_on_death_animation_finished)
+
+func _on_death_animation_finished() -> void:
+	queue_free()
 
 func _on_patrol_timer_timeout() -> void:
 	change_direction()

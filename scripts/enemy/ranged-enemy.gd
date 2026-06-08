@@ -78,3 +78,6 @@ func _set_animation(anim: String) -> void:
 		"attack":
 			sprite.offset = Vector2(0, -6)
 			sprite.scale = Vector2(0.320, 0.330)
+
+func _on_death() -> void:
+	queue_free()

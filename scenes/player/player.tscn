@@ -1,13 +1,15 @@
-[gd_scene load_steps=30 format=3 uid="uid://bwalq7d52qkm3"]
+[gd_scene format=3 uid="uid://bwalq7d52qkm3"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://by4tj8g15r4n5" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b3qg03tt7q87u" path="res://assets/player/ataque1.png" id="2_31cv2"]
+[ext_resource type="PackedScene" uid="uid://c3st0n3p1dr4x" path="res://scenes/player/piedra.tscn" id="2_dt7fs"]
 [ext_resource type="Texture2D" uid="uid://cfgxaayc2u4ow" path="res://assets/player/ataque 3.png" id="3_pf23h"]
 [ext_resource type="Texture2D" uid="uid://bnalclfsp07n" path="res://assets/player/death.png" id="4_dt7fs"]
 [ext_resource type="Texture2D" uid="uid://cj81b4pps7ehp" path="res://assets/player/death1.png" id="5_wqfne"]
 [ext_resource type="Texture2D" uid="uid://dbi0o6ojcfkak" path="res://assets/player/death2.png" id="6_wnwbv"]
 [ext_resource type="Texture2D" uid="uid://bkssebs4wd1fr" path="res://assets/player/death3.png" id="7_gl8cc"]
 [ext_resource type="Texture2D" uid="uid://dcw532lej8bnf" path="res://assets/player/parado 1.png" id="8_487ah"]
+[ext_resource type="Texture2D" uid="uid://b5wrkw3y133p3" path="res://assets/player/player.png" id="8_pf23h"]
 [ext_resource type="Texture2D" uid="uid://t82d37ctu5kn" path="res://assets/player/parado 2.png" id="9_md1ol"]
 [ext_resource type="Texture2D" uid="uid://bdpkx3xbkenaq" path="res://assets/player/parado 3.png" id="10_bj30b"]
 [ext_resource type="Texture2D" uid="uid://s7oeq0m14nr0" path="res://assets/player/parado 4.png" id="11_jc3p3"]
@@ -30,6 +32,26 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(56, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt7fs"]
+atlas = ExtResource("8_pf23h")
+region = Rect2(219, 169, 46, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqfne"]
+atlas = ExtResource("8_pf23h")
+region = Rect2(501, 92, 68, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnwbv"]
+atlas = ExtResource("8_pf23h")
+region = Rect2(269, 169, 104, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl8cc"]
+atlas = ExtResource("8_pf23h")
+region = Rect2(59, 169, 67, 77)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uniwh"]
+atlas = ExtResource("8_pf23h")
+region = Rect2(59, 169, 77, 77)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
 resource_local_to_scene = true
@@ -60,6 +82,35 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt7fs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnwbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnwbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqfne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnwbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl8cc")
+}],
+"loop": true,
+"name": &"honda",
 "speed": 5.0
 }, {
 "frames": [{
@@ -129,6 +180,14 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uniwh")
+}],
+"loop": false,
+"name": &"soltar",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 0.8,
 "texture": ExtResource("25_6e8lb")
 }, {
@@ -143,27 +202,27 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=18534324 groups=["player"]]
 position = Vector2(0, -2)
 collision_layer = 4
 script = ExtResource("1_g2els")
+piedra_scene = ExtResource("2_dt7fs")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1737378177]
+visible = false
 position = Vector2(17, -10.5)
 shape = SubResource("RectangleShape2D_g2els")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0.5, 3)
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1662950670]
 position = Vector2(177, -108)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["player"]]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=573396445 groups=["player"]]
 position = Vector2(13, -8)
 scale = Vector2(0.989833, 0.833832)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
-animation = &"run"
-frame = 2
-frame_progress = 0.958134
+animation = &"soltar"
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1225688065]
+position = Vector2(45, -17)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

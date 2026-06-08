@@ -12,9 +12,14 @@ extends CharacterBody2D
 # --- Estado compartido ---
 var player: Node = null
 var patrol_direction: float = 1.0
+var is_dead: bool = false
+
+@export var max_lives: int = 1
+var lives: int
 
 # --- Inicialización del jugador ---
 func _ready() -> void:
+	lives = max_lives
 	_find_player()
 
 func _find_player() -> void:
@@ -39,3 +44,14 @@ func update_sprite_direction(sprite: AnimatedSprite2D, dir: float) -> void:
 		sprite.flip_h = false
 	elif dir < 0:
 		sprite.flip_h = true
+
+func recibir_danio(_cantidad: int = 1) -> void:
+	if is_dead:
+		return
+	lives -= 1
+	if lives <= 0:
+		is_dead = true
+		_on_death()
+
+func _on_death() -> void:
+	queue_free()

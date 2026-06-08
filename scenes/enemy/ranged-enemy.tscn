@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://cgh0c4rihbr7e"]
+[gd_scene format=3 uid="uid://cgh0c4rihbr7e"]
 
-[ext_resource type="Script" path="res://scripts/enemy/ranged-enemy.gd" id="1_7upw8"]
+[ext_resource type="Script" uid="uid://cs4bgh1f1oolq" path="res://scripts/enemy/ranged-enemy.gd" id="1_7upw8"]
 [ext_resource type="PackedScene" uid="uid://dy6e8nsptw338" path="res://scenes/enemy/projectile.tscn" id="2_o01g3"]
 [ext_resource type="Texture2D" uid="uid://drh3aacfjitrw" path="res://assets/enemy/enemy_attack.png" id="3_ncoir"]
 [ext_resource type="Texture2D" uid="uid://c6soys1ifvtaw" path="res://assets/enemy/enemy_idle.png" id="4_cj8pp"]
@@ -153,7 +153,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8i8w"]
 size = Vector2(41, 77)
 
-[node name="RangedEnemy" type="CharacterBody2D"]
+[node name="RangedEnemy" type="CharacterBody2D" unique_id=1374318686]
 collision_layer = 2
 script = ExtResource("1_7upw8")
 projectile_scene = ExtResource("2_o01g3")
@@ -161,7 +161,7 @@ patrol_left = 620.0
 patrol_right = 860.0
 detection_range = 250.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1038487606]
 z_as_relative = false
 position = Vector2(-19.9893, -38.9723)
 scale = Vector2(0.215733, 0.197365)
@@ -171,14 +171,14 @@ autoplay = "idle"
 frame_progress = 0.916101
 centered = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=4964871]
 shape = SubResource("RectangleShape2D_w8i8w")
 
-[node name="RayCastLeft" type="RayCast2D" parent="."]
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=494301223]
 target_position = Vector2(-30, 0)
 
-[node name="RayCastRight" type="RayCast2D" parent="."]
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=365085089]
 target_position = Vector2(30, 0)
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=426406918]
 wait_time = 4.0
