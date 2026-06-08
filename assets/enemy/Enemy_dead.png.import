@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0bvftb5goo67"
-path="res://.godot/imported/background-cusco.png-5c47812f4f146ea28be762a611144ec6.ctex"
+uid="uid://djygngfvrfdhg"
+path="res://.godot/imported/Enemy_dead.png-5c29d94671e78923a8ee44e38650c6e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/background-cusco.png"
-dest_files=["res://.godot/imported/background-cusco.png-5c47812f4f146ea28be762a611144ec6.ctex"]
+source_file="res://assets/enemy/Enemy_dead.png"
+dest_files=["res://.godot/imported/Enemy_dead.png-5c29d94671e78923a8ee44e38650c6e2.ctex"]
 
 [params]
 

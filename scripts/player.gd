@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var jump_force: float = -420.0
 @export var gravity: float = 900.0
 @export var max_lives: int = 5
+@onready var attack_area = CollisionShape2D
 
 var lives: int
 var is_dead: bool = false
@@ -54,6 +55,11 @@ func _physics_process(delta: float) -> void:
 		_actualizar_animacion(direction)
 
 	move_and_slide()
+
+func golpear_enemigos() -> void:
+	for body in attack_area.get_overlapping_bodies():
+		if body.has_method("recibir_danio"):
+			body.recibir_danio(1)
 
 func _actualizar_animacion(direction: float) -> void:
 	if esta_atacando:
