@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://c201lmg5ryy3j"]
+
+[ext_resource type="Script" uid="uid://cdubyqfjy5eks" path="res://scripts/ui/menu.gd" id="1_7w7rl"]
+[ext_resource type="Texture2D" uid="uid://l05v14hyupyj" path="res://assets/ui/background-menu.png" id="2_wedc3"]
+[ext_resource type="FontFile" uid="uid://blr2cd6t60jqd" path="res://assets/fonts/PressStart2P.ttf" id="3_w6y0u"]
+[ext_resource type="StyleBox" uid="uid://xidg8ru437nx" path="res://scenes/ui/button-style.tres" id="4_cghgw"]
+[ext_resource type="FontFile" uid="uid://bwfugqcnmgxux" path="res://assets/fonts/upheavtt.ttf" id="4_cx0sj"]
+[ext_resource type="StyleBox" uid="uid://b0qdnd1sle8wl" path="res://scenes/ui/button-hover.tres" id="4_ntye7"]
+
+[sub_resource type="Theme" id="Theme_ntye7"]
+default_font = ExtResource("3_w6y0u")
+
+[sub_resource type="Theme" id="Theme_cghgw"]
+
+[sub_resource type="Theme" id="Theme_1pxh0"]
+default_font = ExtResource("4_cx0sj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ntye7"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_288ov"]
+
+[node name="Menu" type="Control" unique_id=1755686237]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7w7rl")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1333836199]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6693154, 0.6693154, 0.6693154, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1945575422]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_wedc3")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1504399533]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.497
+anchor_top = 0.523
+anchor_right = 0.497
+anchor_bottom = 0.523
+offset_left = -140.794
+offset_top = -1.9039917
+offset_right = 141.456
+offset_bottom = 69.59601
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ntye7")
+theme_override_constants/separation = 16
+
+[node name="Play" type="Button" parent="VBoxContainer" unique_id=690303729]
+layout_mode = 2
+theme = SubResource("Theme_cghgw")
+theme_override_colors/font_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_colors/font_focus_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_colors/font_pressed_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_colors/font_hover_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("4_cghgw")
+theme_override_styles/pressed = ExtResource("4_ntye7")
+theme_override_styles/hover = ExtResource("4_ntye7")
+theme_override_styles/hover_pressed = ExtResource("4_ntye7")
+text = "Jugar"
+
+[node name="Quit" type="Button" parent="VBoxContainer" unique_id=2002461354]
+layout_mode = 2
+theme = SubResource("Theme_cghgw")
+theme_override_colors/font_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_colors/font_focus_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_colors/font_pressed_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_colors/font_hover_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("4_cghgw")
+theme_override_styles/pressed = ExtResource("4_ntye7")
+theme_override_styles/hover = ExtResource("4_ntye7")
+theme_override_styles/hover_pressed = ExtResource("4_ntye7")
+text = "Salir"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=408309607]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -263.0
+offset_top = -178.0
+offset_right = 263.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1pxh0")
+theme_override_colors/default_color = Color(0.89385575, 0.6838279, 0.4475446, 1)
+theme_override_colors/font_shadow_color = Color(0.013020813, 0.004408088, 0.004408088, 1)
+theme_override_constants/shadow_outline_size = 25
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/normal_font_size = 86
+theme_override_styles/normal = SubResource("StyleBoxTexture_ntye7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_288ov")
+text = "WAÑUY ÑAM"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
