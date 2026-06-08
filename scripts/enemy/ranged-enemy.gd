@@ -1,3 +1,4 @@
+
 # ranged-enemy.gd — Enemigo a distancia
 # Extiende la clase base Enemy para agregar comportamiento de patrulla y disparo.
 extends "res://scripts/enemy/enemy.gd"
@@ -55,16 +56,28 @@ func _wait_then_continue() -> void:
 	await get_tree().create_timer(2.0).timeout
 	is_waiting = false
 
+var is_shooting: bool = false
+
 func _on_shoot_timer_timeout() -> void:
-	if _player_in_range() and projectile_scene != null:
+	if _player_in_range() and projectile_scene != null and not is_shooting:
 		_shoot()
 
 func _shoot() -> void:
-	var proj = projectile_scene.instantiate()
-	get_tree().root.add_child(proj)
-	proj.global_position = global_position + Vector2(0, -20)
-	var dir = sign(player.global_position.x - global_position.x)
-	proj.init(dir)
+	is_shooting = true
+	var angles = [-35, -40, -45, -50] 
+	for angle_offset in angles:
+		if not is_inside_tree():
+			break
+		var proj = projectile_scene.instantiate()
+		get_tree().root.add_child(proj)
+		proj.global_position = global_position + Vector2(0, -20)
+		var dir = sign(player.global_position.x - global_position.x)
+		proj.init(dir, angle_offset)
+		await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(1.0).timeout
+	is_shooting = false
+		
+
 
 func _set_animation(anim: String) -> void:
 	sprite.play(anim)
@@ -78,6 +91,3 @@ func _set_animation(anim: String) -> void:
 		"attack":
 			sprite.offset = Vector2(0, -6)
 			sprite.scale = Vector2(0.320, 0.330)
-
-func _on_death() -> void:
-	queue_free()

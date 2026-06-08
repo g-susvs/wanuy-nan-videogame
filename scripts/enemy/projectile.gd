@@ -5,18 +5,18 @@ extends Area2D
 var direction: float = 1.0
 var velocity: Vector2 = Vector2.ZERO
 
-func init(dir: float) -> void:
+func init(dir: float, angle_offset: float = -50.0) -> void:
 	direction = dir
-	var angle = deg_to_rad(25)
+	var angle = deg_to_rad(angle_offset)
 	velocity.x = speed * cos(angle) * direction
-	velocity.y = -speed * sin(angle)
+	velocity.y = speed * sin(angle)
 
 func _ready() -> void:
 	set_deferred("monitoring", false)
 	await get_tree().process_frame
 	await get_tree().process_frame
 	set_deferred("monitoring", true)
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(4.8).timeout
 	if is_inside_tree():
 		queue_free()
 

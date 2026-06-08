@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bwalq7d52qkm3" path="res://scenes/player/player.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cljhip1jmyafq" path="res://scenes/ui/game-over-screen.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dk6sa7fwr6kn8" path="res://scenes/ui/heads-up display.tscn" id="5_hud01"]
+[ext_resource type="Script" uid="uid://df1uce2p22e7c" path="res://scripts/enemy/enemy_spawner.gd" id="6_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://cgh0c4rihbr7e" path="res://scenes/enemy/ranged-enemy.tscn" id="7_tipki"]
 
 [node name="Main" type="Node2D" unique_id=1300466506]
 position = Vector2(-37, -628)
@@ -25,3 +27,14 @@ slide_on_ceiling = false
 [node name="GameOverScreen" parent="." unique_id=974271638 instance=ExtResource("4_jyhfs")]
 
 [node name="HUD" parent="." unique_id=189534934 instance=ExtResource("5_hud01")]
+
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=1304824037]
+script = ExtResource("6_o6xl0")
+enemy_scene = ExtResource("7_tipki")
+spawn_interval = 10.0
+
+[node name="Marker2D" type="Marker2D" parent="EnemySpawner" unique_id=1616079441]
+position = Vector2(395, 926)
+
+[node name="Marker2D2" type="Marker2D" parent="EnemySpawner" unique_id=2102537173]
+position = Vector2(823, 961)
