@@ -4,6 +4,7 @@ extends "res://scripts/enemy/enemy.gd"
 
 @export var stop_distance: float = 50.0
 @export var raycast_distance: float = 12.0
+@export var max_lives: int = 1
 
 @onready var attack_area = $AttackArea
 @onready var attack_cooldown = $AttackCooldown
@@ -13,9 +14,12 @@ extends "res://scripts/enemy/enemy.gd"
 
 var can_attack: bool = true
 var player_in_attack_range: bool = false
+var lives: int
+var is_dead: bool = false
+var esta_atacando: bool = false
 
 func _ready() -> void:
-	super._ready()
+	super._ready() 
 	floor_raycast.position.x = raycast_distance
 
 func _physics_process(delta: float) -> void:

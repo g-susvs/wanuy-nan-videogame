@@ -1,26 +1,26 @@
-[gd_scene format=3 uid="uid://dy6e8nsptw338"]
+[gd_scene load_steps=4 format=3 uid="uid://dy6e8nsptw338"]
 
 [ext_resource type="Texture2D" uid="uid://v4ch8fxgfv8d" path="res://assets/enemy/lanza.png" id="1_c8fcr"]
-[ext_resource type="Script" uid="uid://63f4dtcv2pkk" path="res://scripts/enemy/projectile.gd" id="1_q3m7n"]
+[ext_resource type="Script" path="res://scripts/enemy/projectile.gd" id="1_q3m7n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3m7n"]
 size = Vector2(55, 9)
 
-[node name="Projectile" type="Area2D" unique_id=269318268]
+[node name="Projectile" type="Area2D"]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_q3m7n")
 speed = null
 launch_gravity = null
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=739608745]
-position = Vector2(-7.1525574e-07, 5.9604645e-08)
-scale = Vector2(0.054848183, 0.16129033)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-7.15256e-07, 5.96046e-08)
+scale = Vector2(0.0548482, 0.16129)
 texture = ExtResource("1_c8fcr")
 region_enabled = true
-region_rect = Rect2(256.0263, 435.65173, 1021.2736, 62.83722)
+region_rect = Rect2(256.026, 435.652, 1021.27, 62.8372)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1934195270]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_q3m7n")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
