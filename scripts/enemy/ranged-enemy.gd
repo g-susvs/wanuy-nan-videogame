@@ -6,6 +6,9 @@ extends "res://scripts/enemy/enemy.gd"
 @export var projectile_scene: PackedScene
 @export var patrol_left: float = 0.0
 @export var patrol_right: float = 200.0
+## Si es > 0, patrulla ±patrol_range px alrededor de su posición inicial.
+## Robusto ante la ubicación del nivel (evita caídas en plataformas pequeñas).
+@export var patrol_range: float = 0.0
 
 var is_waiting: bool = false
 var direction: float = 1.0
@@ -17,6 +20,11 @@ var direction: float = 1.0
 
 func _ready() -> void:
 	super._ready()
+	# Límites de patrulla relativos al punto de aparición (independiente de dónde
+	# se coloque el nivel en la escena principal).
+	if patrol_range > 0.0:
+		patrol_left = global_position.x - patrol_range
+		patrol_right = global_position.x + patrol_range
 	shoot_timer.wait_time = 2.0
 	shoot_timer.one_shot = false
 	shoot_timer.timeout.connect(_on_shoot_timer_timeout)

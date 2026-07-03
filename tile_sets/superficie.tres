@@ -1977,6 +1977,7 @@ texture = ExtResource("1_chrvx")
 37:2/0 = 0
 38:2/0 = 0
 39:2/0 = 0
+39:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 40:2/0 = 0
 41:2/0 = 0
 42:2/0 = 0
