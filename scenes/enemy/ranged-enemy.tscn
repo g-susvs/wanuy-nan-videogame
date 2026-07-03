@@ -175,10 +175,12 @@ centered = false
 shape = SubResource("RectangleShape2D_w8i8w")
 
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=494301223]
-target_position = Vector2(-30, 0)
+position = Vector2(-28, 20)
+target_position = Vector2(0, 40)
 
 [node name="RayCastRight" type="RayCast2D" parent="." unique_id=365085089]
-target_position = Vector2(30, 0)
+position = Vector2(28, 20)
+target_position = Vector2(0, 40)
 
 [node name="Timer" type="Timer" parent="." unique_id=426406918]
 wait_time = 4.0

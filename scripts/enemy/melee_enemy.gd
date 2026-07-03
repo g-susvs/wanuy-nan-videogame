@@ -3,7 +3,11 @@
 extends "res://scripts/enemy/enemy.gd"
 
 @export var stop_distance: float = 50.0
-@export var raycast_distance: float = 12.0
+## Alcance del rayo de piso hacia el frente (desde el centro del colisionador).
+@export var raycast_distance: float = 32.0
+
+## El colisionador está desplazado en X respecto al origen del nodo.
+const BODY_CENTER_X: float = -12.0
 
 @onready var attack_area = $AttackArea
 @onready var attack_cooldown = $AttackCooldown
@@ -16,8 +20,18 @@ var player_in_attack_range: bool = false
 var esta_atacando: bool = false
 
 func _ready() -> void:
-	super._ready() 
-	floor_raycast.position.x = raycast_distance
+	super._ready()
+	_aim_floor_ray(patrol_direction)
+
+## Coloca el rayo de piso al frente según la dirección (recto hacia abajo).
+func _aim_floor_ray(dir: float) -> void:
+	floor_raycast.position.x = BODY_CENTER_X + dir * raycast_distance
+
+## ¿Hay piso justo delante en la dirección dada? Actualiza el rayo en el acto.
+func _floor_ahead(dir: float) -> bool:
+	_aim_floor_ray(dir)
+	floor_raycast.force_raycast_update()
+	return floor_raycast.is_colliding()
 
 func _physics_process(delta: float) -> void:
 	apply_gravity(delta)
@@ -25,46 +39,51 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func handle_behavior() -> void:
-	var should_patrol = player == null or player.is_dead
-	if should_patrol:
-		handle_patrol()
-	else:
+	# Persigue sólo si el jugador está vivo y a rango; si no, patrulla.
+	# (La base asigna 'player' al aparecer, por eso gateamos por distancia.)
+	if player != null and not player.is_dead and _player_in_range():
 		handle_chase()
+	else:
+		handle_patrol()
 
 func handle_patrol() -> void:
+	# Girar en el borde ANTES de moverse (no pisar el vacío este frame)
+	if is_on_floor() and not _floor_ahead(patrol_direction):
+		change_direction()
 	velocity.x = patrol_direction * speed
 	update_sprite_direction(animated_sprite, patrol_direction)
-	animated_sprite.play("step1")
-	if is_on_floor():
-		if velocity.x != 0 and !floor_raycast.is_colliding():
-			change_direction()
+	if animated_sprite.animation != "step1":
+		animated_sprite.play("step1")
 
 func handle_chase() -> void:
-	var distance = player.global_position.x - global_position.x
+	var distance: float = player.global_position.x - global_position.x
 
-	# Perseguir jugador
-	if abs(distance) > stop_distance:
-		var dir = sign(distance)
+	# Cerca: atacar
+	if abs(distance) <= stop_distance:
+		velocity.x = 0
+		if player_in_attack_range:
+			attack()
+		elif animated_sprite.animation != "stand":
+			animated_sprite.play("stand")
+		return
+
+	# Perseguir en la dirección del jugador
+	var dir: float = -1.0 if distance < 0.0 else 1.0
+	patrol_direction = dir
+	# Si hay un abismo delante, no perseguir al vacío: detenerse en el borde
+	if is_on_floor() and not _floor_ahead(dir):
+		velocity.x = 0
+		if animated_sprite.animation != "stand":
+			animated_sprite.play("stand")
+	else:
 		velocity.x = dir * speed
 		update_sprite_direction(animated_sprite, dir)
 		if animated_sprite.animation != "step1":
 			animated_sprite.play("step1")
 
-	# Cerca del jugador
-	else:
-		velocity.x = 0
-
-		# Atacar
-		if player_in_attack_range:
-			attack()
-
-		# Idle solo si NO está atacando
-		elif animated_sprite.animation != "stand":
-			animated_sprite.play("stand")
-
 func change_direction() -> void:
 	patrol_direction *= -1
-	floor_raycast.position.x = raycast_distance * patrol_direction
+	_aim_floor_ray(patrol_direction)
 
 func attack() -> void:
 	if can_attack == false:

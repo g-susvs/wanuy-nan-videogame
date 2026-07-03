@@ -46,11 +46,21 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _patrol() -> void:
-	if direction > 0 and (ray_right.is_colliding() or global_position.x >= patrol_right):
+	# RayCastLeft/Right apuntan hacia abajo en los bordes delanteros: si NO chocan,
+	# no hay piso adelante (borde/abismo) y hay que girar. Sólo se comprueba cuando
+	# el enemigo está sobre el suelo, para no girar durante la caída al aparecer.
+	var no_floor_ahead := false
+	if is_on_floor():
+		if direction > 0:
+			no_floor_ahead = not ray_right.is_colliding()
+		else:
+			no_floor_ahead = not ray_left.is_colliding()
+
+	if direction > 0 and (no_floor_ahead or global_position.x >= patrol_right):
 		direction = -1.0
 		_wait_then_continue()
 		return
-	elif direction < 0 and (ray_left.is_colliding() or global_position.x <= patrol_left):
+	elif direction < 0 and (no_floor_ahead or global_position.x <= patrol_left):
 		direction = 1.0
 		_wait_then_continue()
 		return
