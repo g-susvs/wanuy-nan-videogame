@@ -13,6 +13,14 @@ extends CharacterBody2D
 ## Gravedad simulada de la piedra para la trayectoria
 @export var stone_gravity: float = 800.0
 
+## ─── Power-up hoja de coca ───
+## Duración del potenciador en segundos
+@export var coca_duration: float = 10.0
+## Cantidad de piedras del disparo múltiple
+@export var multi_shot_count: int = 4
+## Apertura total del abanico en grados
+@export var multi_shot_spread_deg: float = 24.0
+
 @onready var attack_area = CollisionShape2D
 
 # ─── Estado ────────────────────────────────────────────────────────────────────
@@ -21,6 +29,7 @@ var is_dead: bool = false
 var esta_atacando: bool = false
 var is_invincible: bool = false
 var is_aiming: bool = false        # true mientras se mantiene clic izquierdo
+var coca_time_left: float = 0.0    # > 0 → disparo múltiple activo
 
 # Señal que emite el nuevo valor de vidas cada vez que cambia
 signal vida_cambiada(vidas_actuales: int)
@@ -63,6 +72,12 @@ func _setup_trajectory() -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
+
+	# Countdown del power-up de la hoja de coca
+	if coca_time_left > 0.0:
+		coca_time_left -= delta
+		if coca_time_left <= 0.0:
+			sprite.modulate = Color.WHITE  # fin del potenciador
 
 	# Gravedad
 	if not is_on_floor():
@@ -175,13 +190,25 @@ func _disparar_honda() -> void:
 	var start := _get_spawn_point()
 	var dir := (mouse_pos - start).normalized()
 
+	if coca_time_left > 0.0 and multi_shot_count > 1:
+		# Disparo múltiple: abanico angular centrado en la dirección de apuntado.
+		# Cada piedra sigue su propia parábola (la gravedad la aplica piedra.gd).
+		var spread := deg_to_rad(multi_shot_spread_deg)
+		for i in range(multi_shot_count):
+			var t := float(i) / (multi_shot_count - 1)  # 0..1
+			var angle := -spread / 2.0 + spread * t
+			_lanzar_piedra(start, dir.rotated(angle))
+	else:
+		_lanzar_piedra(start, dir)
+	# La animación "soltar" ya está corriendo; _reanudar_animacion()
+	# se llamará cuando animation_finished la detecte.
+
+func _lanzar_piedra(start: Vector2, dir: Vector2) -> void:
 	var piedra = piedra_scene.instantiate()
 	# Añadir como hijo del padre del jugador para que no se mueva con él
 	get_parent().add_child(piedra)
 	piedra.global_position = start
 	piedra.init(dir * stone_speed)
-	# La animación "soltar" ya está corriendo; _reanudar_animacion()
-	# se llamará cuando animation_finished la detecte.
 
 func _reanudar_animacion() -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -215,6 +242,15 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		var game_over = get_tree().root.get_node_or_null("Main/GameOverScreen")
 		if game_over:
 			game_over.show_game_over()
+
+# ─── Power-up hoja de coca ─────────────────────────────────────────────────────
+
+## Activa (o renueva) el disparo múltiple durante coca_duration segundos.
+## Lo llama coca_leaf.gd al ser recolectada.
+func recolectar_coca() -> void:
+	coca_time_left = coca_duration
+	# Tinte dorado mientras dura el potenciador
+	sprite.modulate = Color(1.3, 1.1, 0.6)
 
 # ─── Daño y vida ───────────────────────────────────────────────────────────────
 
