@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://xidg8ru437nx" path="res://scenes/ui/button-style.tres" id="4_cghgw"]
 [ext_resource type="FontFile" uid="uid://bwfugqcnmgxux" path="res://assets/fonts/upheavtt.ttf" id="4_cx0sj"]
 [ext_resource type="StyleBox" uid="uid://b0qdnd1sle8wl" path="res://scenes/ui/button-hover.tres" id="4_ntye7"]
+[ext_resource type="AudioStream" uid="uid://dak7g328s0bsq" path="res://audio/Menu.wav" id="7_cghgw"]
 
 [sub_resource type="Theme" id="Theme_ntye7"]
 default_font = ExtResource("3_w6y0u")
@@ -82,7 +83,7 @@ theme_override_styles/hover = ExtResource("4_ntye7")
 theme_override_styles/hover_pressed = ExtResource("4_ntye7")
 text = "Jugar"
 
-[node name="Controls" type="Button" parent="VBoxContainer" unique_id=3103571246]
+[node name="Controls" type="Button" parent="VBoxContainer" unique_id=-1191396050]
 layout_mode = 2
 theme = SubResource("Theme_cghgw")
 theme_override_colors/font_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
@@ -136,6 +137,11 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_ntye7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_288ov")
 text = "WAÑUY ÑAM"
 horizontal_alignment = 1
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=106095641]
+stream = ExtResource("7_cghgw")
+volume_db = -20.0
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_controls_pressed"]

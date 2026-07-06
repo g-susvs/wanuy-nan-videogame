@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://rsv2d6tfcsms" path="res://scenes/enemy/melee-enemy.tscn" id="3_ieimj"]
 [ext_resource type="PackedScene" uid="uid://cgh0c4rihbr7e" path="res://scenes/enemy/ranged-enemy.tscn" id="4_a1qmq"]
 [ext_resource type="PackedScene" uid="uid://bc0ca13afsc3n" path="res://scenes/items/coca-leaf.tscn" id="4_gl321"]
+[ext_resource type="AudioStream" uid="uid://co3nf7fkgl2hm" path="res://audio/lvl1.wav" id="5_ieimj"]
 
 [node name="level-1" type="Node2D" unique_id=79459589]
 position = Vector2(7, 25)
@@ -33,3 +34,8 @@ position = Vector2(649, -542)
 
 [node name="Enemy2" parent="." unique_id=462712716 instance=ExtResource("4_a1qmq")]
 position = Vector2(1348, -587)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=696597634]
+stream = ExtResource("5_ieimj")
+volume_db = -20.0
+autoplay = true
