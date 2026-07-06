@@ -17,6 +17,7 @@ var _time: float = 0.0
 var _base_y: float = 0.0
 
 @onready var _sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var _pickup_sound: AudioStreamPlayer2D = $PickupSound
 
 
 # ─── Inicialización ──────────────────────────────────────────────────────────
@@ -39,4 +40,11 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player") and body.has_method("recolectar_coca"):
 		body.recolectar_coca()
+		# Ocultar y desactivar el ítem, pero mantener el nodo vivo
+		# hasta que termine el sonido (queue_free lo cortaría en seco).
+		hide()
+		set_deferred("monitoring", false)
+		set_process(false)
+		_pickup_sound.play()
+		await _pickup_sound.finished
 		queue_free()

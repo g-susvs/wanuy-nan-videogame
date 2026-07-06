@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dk6sa7fwr6kn8"]
 
 [ext_resource type="Script" uid="uid://3b7m6eu3av7s" path="res://scripts/ui/heads_up_display.gd" id="1_uwsif"]
-[ext_resource type="Texture2D" uid="uid://8qw7ncxrk0nd" path="res://assets/items/coca-leaf/coca-leaf-1.png" id="2_cocaicon"]
+[ext_resource type="Texture2D" uid="uid://dor3wy3ohblj0" path="res://assets/items/coca-leaf/coca-leaf-3.png" id="2_w55gr"]
 [ext_resource type="FontFile" uid="uid://blr2cd6t60jqd" path="res://assets/fonts/PressStart2P.ttf" id="3_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwsif"]
@@ -32,7 +32,7 @@ offset_right = 100.0
 offset_bottom = 98.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_uwsif")
 
-[node name="CocaContainer" type="HBoxContainer" parent="CocaPanel"]
+[node name="CocaContainer" type="HBoxContainer" parent="CocaPanel" unique_id=623811741]
 layout_mode = 2
 theme_override_constants/separation = 6
 
@@ -41,7 +41,7 @@ custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-texture = ExtResource("2_cocaicon")
+texture = ExtResource("2_w55gr")
 expand_mode = 1
 stretch_mode = 5
 
