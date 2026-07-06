@@ -1,0 +1,59 @@
+diff --git a/project.godot b/project.godot
+index 0fda207..fda7173 100644
+--- a/project.godot
++++ b/project.godot
+@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+ [application]
+ 
+ config/name="wanuy-nan-videogame"
+-run/main_scene="res://scenes/main.tscn"
++run/main_scene="res://scenes/ui/menu.tscn"
+ config/features=PackedStringArray("4.3", "GL Compatibility")
+ 
+ [file_customization]
+diff --git a/scenes/ui/menu.tscn b/scenes/ui/menu.tscn
+index ae939a2..050a83b 100644
+--- a/scenes/ui/menu.tscn
++++ b/scenes/ui/menu.tscn
+@@ -82,6 +82,21 @@ theme_override_styles/hover = ExtResource("4_ntye7")
+ theme_override_styles/hover_pressed = ExtResource("4_ntye7")
+ text = "Jugar"
+ 
++[node name="Controls" type="Button" parent="VBoxContainer" unique_id=3103571246]
++layout_mode = 2
++theme = SubResource("Theme_cghgw")
++theme_override_colors/font_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
++theme_override_colors/font_focus_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
++theme_override_colors/font_pressed_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
++theme_override_colors/font_hover_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
++theme_override_colors/font_hover_pressed_color = Color(0.80784315, 0.7176471, 0.62352943, 1)
++theme_override_font_sizes/font_size = 24
++theme_override_styles/normal = ExtResource("4_cghgw")
++theme_override_styles/pressed = ExtResource("4_ntye7")
++theme_override_styles/hover = ExtResource("4_ntye7")
++theme_override_styles/hover_pressed = ExtResource("4_ntye7")
++text = "Controles"
++
+ [node name="Quit" type="Button" parent="VBoxContainer" unique_id=2002461354]
+ layout_mode = 2
+ theme = SubResource("Theme_cghgw")
+@@ -123,4 +138,5 @@ text = "WAÑUY ÑAM"
+ horizontal_alignment = 1
+ 
+ [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
++[connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+ [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+diff --git a/scripts/ui/menu.gd b/scripts/ui/menu.gd
+index b57d0c1..1ca07d1 100644
+--- a/scripts/ui/menu.gd
++++ b/scripts/ui/menu.gd
+@@ -15,5 +15,9 @@ func _on_play_pressed() -> void:
+ 	get_tree().change_scene_to_file("res://scenes/main.tscn")
+ 
+ 
++func _on_controls_pressed() -> void:
++	get_tree().change_scene_to_file("res://scenes/ui/controls.tscn")
++
++
+ func _on_quit_pressed() -> void:
+ 	get_tree().quit() # Replace with function body.
