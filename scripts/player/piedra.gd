@@ -1,51 +1,62 @@
-extends Area2D
-## Velocidad heredada de la dirección de lanzamiento.
-## Se inicializa mediante init() al instanciar la escena.
-var velocity: Vector2 = Vector2.ZERO
-## Gravedad propia de la piedra (independiente del jugador)
-@export var stone_gravity: float = 800.0
+extends RigidBody2D
+## Piedra lanzada por el jugador.
+## El vuelo, rebote y rodado los maneja el motor de física
+## (RigidBody2D + PhysicsMaterial); aquí solo va el daño y el despawn.
+
+## Segundos que sigue rodando tras el primer impacto contra una superficie
+@export var roll_lifetime: float = 1.2
+## Vida máxima total si no impacta nada
+@export var max_lifetime: float = 6.0
+
+var _despawn_started: bool = false
 
 
 # ─── Inicialización ────────────────────────────────────────────────────────────
 func init(vel: Vector2) -> void:
-	velocity = vel
+	linear_velocity = vel
+
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	set_deferred("monitoring", false)
-	await get_tree().process_frame
-	await get_tree().process_frame
-	set_deferred("monitoring", true)
-	# Auto-destruir tras 6 s si no impacta nada
-	await get_tree().create_timer(6.0).timeout
+	# Auto-destruir tras max_lifetime si no impacta nada
+	await get_tree().create_timer(max_lifetime).timeout
 	if is_inside_tree():
 		queue_free()
-		
-		
-# ─── Física ────────────────────────────────────────────────────────────────────
-func _process(delta: float) -> void:
-	# Parábola real: acumulamos gravedad en Y
-	velocity.y += stone_gravity * delta
-	position += velocity * delta
-	# Rotar el nodo según el vector velocidad (orientación de vuelo)
-	rotation = atan2(velocity.y, velocity.x)
-	
-	
-# ─── Visual (dibujado procedural, sin asset externo) ───────────────────────────
-func _draw() -> void:
-	# Sombra
-	draw_circle(Vector2(1.2, 1.2), 7.5, Color(0.08, 0.06, 0.04, 0.35))
-	# Cuerpo principal gris-café
-	draw_circle(Vector2.ZERO, 7.0, Color(0.42, 0.37, 0.30))
-	# Borde oscuro (outline)
-	draw_arc(Vector2.ZERO, 7.0, 0.0, TAU, 28, Color(0.20, 0.16, 0.12), 1.5)
-	# Veta central
-	draw_line(Vector2(-3, -1), Vector2(2, 2), Color(0.30, 0.26, 0.20, 0.6), 1.0)
-	# Brillo especular
-	draw_circle(Vector2(-2.5, -2.5), 2.0, Color(0.75, 0.70, 0.60, 0.80))
-	
-	
+
+
 # ─── Colisión ──────────────────────────────────────────────────────────────────
 func _on_body_entered(body: Node) -> void:
+	if _despawn_started:
+		# Ya impactó antes: la piedra es inofensiva, los rebotes no dañan
+		return
 	if body.has_method("recibir_danio"):
+		# Enemigo: aplicar daño y desaparecer al instante
 		body.recibir_danio()
-	queue_free()
+		queue_free()
+	else:
+		# Superficie. Pero si en este mismo paso de física también está
+		# tocando a un enemigo (impacto rasante a la altura de los pies),
+		# ese contacto cuenta como impacto directo: dañar en vez de rebotar.
+		for other in get_colliding_bodies():
+			if other.has_method("recibir_danio"):
+				other.recibir_danio()
+				queue_free()
+				return
+		# Solo suelo/pared: el motor ya la hace rebotar y rodar;
+		# desde aquí deja de hacer daño y está por desaparecer.
+		_iniciar_despawn()
+
+
+# ─── Despawn ───────────────────────────────────────────────────────────────────
+## Marca la piedra como inofensiva, la hace parpadear como aviso
+## y la libera tras roll_lifetime segundos.
+func _iniciar_despawn() -> void:
+	_despawn_started = true
+	# Parpadeo: alterna la opacidad del sprite en loop hasta que se libere
+	var tween := create_tween().set_loops()
+	tween.tween_property($Sprite2D, "modulate:a", 0.25, 0.12)
+	tween.tween_property($Sprite2D, "modulate:a", 1.0, 0.12)
+
+	await get_tree().create_timer(roll_lifetime).timeout
+	if is_inside_tree():
+		queue_free()

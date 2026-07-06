@@ -154,7 +154,7 @@ animations = [{
 size = Vector2(41, 77)
 
 [node name="RangedEnemy" type="CharacterBody2D" unique_id=1374318686]
-collision_layer = 2
+collision_layer = 16
 script = ExtResource("1_7upw8")
 projectile_scene = ExtResource("2_o01g3")
 patrol_left = 620.0

@@ -2,6 +2,8 @@
 extends CanvasLayer
 
 @onready var hearts_container: HBoxContainer = $PanelContainer/HeartsContainer
+@onready var coca_panel: PanelContainer = $CocaPanel
+@onready var coca_time_label: Label = $CocaPanel/CocaContainer/CocaTimeLabel
 
 const HEART_FULL  = preload("res://assets/ui/hearth.png")
 const HEART_EMPTY = preload("res://assets/ui/empty-hearth.png")
@@ -16,6 +18,7 @@ const HEART_SIZE  = Vector2(44, 44)
 			_dibujar_corazones(preview_lives, preview_lives)
 
 var max_lives: int = 5
+var player: Node = null
 
 func _ready() -> void:
 	# En el editor: mostrar preview con los valores configurados
@@ -27,11 +30,25 @@ func _ready() -> void:
 	# En el juego: conectar al jugador real
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
-		var player = players[0]
+		player = players[0]
 		max_lives = player.max_lives
 		_crear_contenedor_corazones(max_lives)
 		_dibujar_corazones(player.lives, max_lives)
 		player.vida_cambiada.connect(_on_vida_cambiada)
+
+# ─── Contador del power-up hoja de coca ────────────────────────────────────────
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	# Leer el tiempo restante directamente del jugador
+	var tiempo: float = player.coca_time_left if is_instance_valid(player) else 0.0
+	if tiempo > 0.0:
+		coca_panel.visible = true
+		# Segundos a dos dígitos, redondeando hacia arriba: 10s → 09s → … → 01s
+		coca_time_label.text = "%02ds" % ceili(tiempo)
+	elif coca_panel.visible:
+		coca_panel.visible = false
 
 func _dibujar_corazones(vidas_actuales: int, total: int) -> void:
 	for i in range(hearts_container.get_child_count()):
