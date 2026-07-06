@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dk6sa7fwr6kn8"]
 
 [ext_resource type="Script" uid="uid://3b7m6eu3av7s" path="res://scripts/ui/heads_up_display.gd" id="1_uwsif"]
+[ext_resource type="Texture2D" uid="uid://8qw7ncxrk0nd" path="res://assets/items/coca-leaf/coca-leaf-1.png" id="2_cocaicon"]
+[ext_resource type="FontFile" uid="uid://blr2cd6t60jqd" path="res://assets/fonts/PressStart2P.ttf" id="3_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwsif"]
 bg_color = Color(0, 0, 0, 0.41568628)
@@ -22,3 +24,31 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_uwsif")
 [node name="HeartsContainer" type="HBoxContainer" parent="PanelContainer" unique_id=447262689]
 layout_mode = 2
 theme_override_constants/separation = -8
+
+[node name="CocaPanel" type="PanelContainer" parent="." unique_id=1571572285]
+offset_left = 7.0
+offset_top = 58.0
+offset_right = 100.0
+offset_bottom = 98.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwsif")
+
+[node name="CocaContainer" type="HBoxContainer" parent="CocaPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CocaIcon" type="TextureRect" parent="CocaPanel/CocaContainer" unique_id=554205076]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_cocaicon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CocaTimeLabel" type="Label" parent="CocaPanel/CocaContainer" unique_id=1795717926]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 14
+text = "10s"
+vertical_alignment = 1
