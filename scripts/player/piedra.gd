@@ -30,20 +30,6 @@ func _process(delta: float) -> void:
 	rotation = atan2(velocity.y, velocity.x)
 	
 	
-# ─── Visual (dibujado procedural, sin asset externo) ───────────────────────────
-func _draw() -> void:
-	# Sombra
-	draw_circle(Vector2(1.2, 1.2), 7.5, Color(0.08, 0.06, 0.04, 0.35))
-	# Cuerpo principal gris-café
-	draw_circle(Vector2.ZERO, 7.0, Color(0.42, 0.37, 0.30))
-	# Borde oscuro (outline)
-	draw_arc(Vector2.ZERO, 7.0, 0.0, TAU, 28, Color(0.20, 0.16, 0.12), 1.5)
-	# Veta central
-	draw_line(Vector2(-3, -1), Vector2(2, 2), Color(0.30, 0.26, 0.20, 0.6), 1.0)
-	# Brillo especular
-	draw_circle(Vector2(-2.5, -2.5), 2.0, Color(0.75, 0.70, 0.60, 0.80))
-	
-	
 # ─── Colisión ──────────────────────────────────────────────────────────────────
 func _on_body_entered(body: Node) -> void:
 	if body.has_method("recibir_danio"):
