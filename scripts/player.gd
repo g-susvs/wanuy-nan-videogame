@@ -21,8 +21,6 @@ extends CharacterBody2D
 ## Apertura total del abanico en grados
 @export var multi_shot_spread_deg: float = 24.0
 
-@onready var attack_area = CollisionShape2D
-
 # ─── Estado ────────────────────────────────────────────────────────────────────
 var lives: int
 var is_dead: bool = false
@@ -37,6 +35,7 @@ signal vida_cambiada(vidas_actuales: int)
 # ─── Nodos ─────────────────────────────────────────────────────────────────────
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var marker: Marker2D = $Marker2D
+@onready var attack_area: Area2D = $AttackArea
 
 var trajectory_line: Line2D   # creado en código para no tocar la escena
 
@@ -46,6 +45,8 @@ func _ready() -> void:
 	lives = max_lives
 	sprite.play("idle")
 	_setup_trajectory()
+	# El golpe melee se aplica en el frame de impacto de la animación
+	sprite.frame_changed.connect(_on_sprite_frame_changed)
 
 func _setup_trajectory() -> void:
 	trajectory_line = Line2D.new()
@@ -115,6 +116,9 @@ func _physics_process(delta: float) -> void:
 			sprite.play("ataque")
 
 		_actualizar_animacion(direction)
+
+	# Espejar el área de ataque hacia donde mira el sprite
+	attack_area.scale.x = -1.0 if sprite.flip_h else 1.0
 
 	move_and_slide()
 
@@ -215,6 +219,12 @@ func _reanudar_animacion() -> void:
 	_actualizar_animacion(direction)
 
 # ─── Ataque cuerpo a cuerpo ────────────────────────────────────────────────────
+
+## Se dispara en cada cambio de frame del sprite: aplica el golpe
+## en el frame de impacto (el segundo) de la animación de ataque.
+func _on_sprite_frame_changed() -> void:
+	if sprite.animation == "ataque" and sprite.frame == 1:
+		golpear_enemigos()
 
 func golpear_enemigos() -> void:
 	for body in attack_area.get_overlapping_bodies():

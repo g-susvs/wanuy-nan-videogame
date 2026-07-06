@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://drh3aacfjitrw" path="res://assets/enemy/enemy_attack.png" id="3_ncoir"]
 [ext_resource type="Texture2D" uid="uid://c6soys1ifvtaw" path="res://assets/enemy/enemy_idle.png" id="4_cj8pp"]
 [ext_resource type="Texture2D" uid="uid://c6h0o6xs0jwfg" path="res://assets/enemy/enemy (2).png" id="5_hc8m3"]
+[ext_resource type="Texture2D" uid="uid://djygngfvrfdhg" path="res://assets/enemy/Enemy_dead.png" id="6_dead"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qclf"]
 atlas = ExtResource("3_ncoir")
@@ -78,8 +79,48 @@ region = Rect2(1144, 272, 190, 390)
 atlas = ExtResource("5_hc8m3")
 region = Rect2(1334, 272, 190, 390)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_dead1"]
+atlas = ExtResource("6_dead")
+region = Rect2(23, 0, 104, 235)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dead2"]
+atlas = ExtResource("6_dead")
+region = Rect2(200, 0, 125, 235)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dead3"]
+atlas = ExtResource("6_dead")
+region = Rect2(356, 0, 216, 235)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dead4"]
+atlas = ExtResource("6_dead")
+region = Rect2(597, 0, 231, 235)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dead5"]
+atlas = ExtResource("6_dead")
+region = Rect2(828, 0, 225, 235)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_8qclf"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dead1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dead2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dead3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dead4")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_dead5")
+}],
+"loop": false,
+"name": &"death",
+"speed": 7.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8qclf")

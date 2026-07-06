@@ -64,9 +64,9 @@ func _on_shoot_timer_timeout() -> void:
 
 func _shoot() -> void:
 	is_shooting = true
-	var angles = [-35, -40, -45, -50] 
+	var angles = [-35, -40, -45, -50]
 	for angle_offset in angles:
-		if not is_inside_tree():
+		if not is_inside_tree() or is_dead:
 			break
 		var proj = projectile_scene.instantiate()
 		get_tree().root.add_child(proj)
@@ -91,3 +91,23 @@ func _set_animation(anim: String) -> void:
 		"attack":
 			sprite.offset = Vector2(0, -6)
 			sprite.scale = Vector2(0.320, 0.330)
+		"death":
+			sprite.offset = Vector2(0, 0)
+			# Frames de 235 px de alto: con 0.33 el cuerpo queda
+			# apoyado sobre el piso (base de la caja de colisión)
+			sprite.scale = Vector2(0.33, 0.33)
+
+
+# ─── Muerte ────────────────────────────────────────────────────────────────────
+## Reemplaza el _on_death() de la clase base (que hacía queue_free directo):
+## congela al enemigo, reproduce la animación y recién entonces lo libera.
+func _on_death() -> void:
+	set_physics_process(false)
+	shoot_timer.stop()
+	$CollisionShape2D.set_deferred("disabled", true)
+	_set_animation("death")
+	sprite.animation_finished.connect(_on_death_animation_finished)
+
+
+func _on_death_animation_finished() -> void:
+	queue_free()
